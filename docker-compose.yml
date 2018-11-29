@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  web:
+    image: "curso-ic:0.0.1-SNAPSHOT"
+    ports:
+      - "8000:8080"
+    depends_on:
+      - sql_server
+  redis:
+    image: "redis"
+    container_name: "redis"
+    ports:
+      - "6379:6379"
+
+  sql_server:
+    image: "microsoft/mssql-server-linux"
+    container_name: "sql_server"
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "Pa$$w0rd1"
+      ACCEPT_EULA: "Y"
+
+networks:
+  default:
+    external:
+      name: "curso-ic"
